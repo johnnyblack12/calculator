@@ -1,6 +1,6 @@
 .header {
     font-family: montserrat;
-    font-size: 3vh;
+    font-size: 4vh;
     text-align: center;
     padding: 8vh;
     color: black;
@@ -33,6 +33,7 @@
     align-items: center;
     justify-content: flex-end;
     font-size: 48px;
+    overflow: hidden;
 }
 
 .clear {
@@ -100,7 +101,7 @@
     cursor: default;
 }
 
-.equals {
+.equal {
     width: 165px;
     height: 69px;
     border-top: 5px solid black;
@@ -116,7 +117,7 @@
 .one:hover,.two:hover,.three:hover,.four:hover,.five:hover,
 .six:hover,.seven:hover,.eight:hover,.nine:hover,.zero:hover,
 .divide:hover,.multiply:hover,.subtract:hover,.add:hover,
-.equals:hover,.clear:hover {
+.equal:hover,.clear:hover {
     background-color: #222;
     color:whitesmoke;
 }
@@ -124,7 +125,7 @@
 .one:active,.two:active,.three:active,.four:active,.five:active,
 .six:active,.seven:active,.eight:active,.nine:active,.zero:active,
 .divide:active,.multiply:active,.subtract:active,.add:active,
-.equals:active,.clear:active {
+.equal:active,.clear:active {
     background-color: #222;
     color:whitesmoke;
     transform: scale(0.9);
