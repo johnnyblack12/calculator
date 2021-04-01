@@ -1,8 +1,10 @@
 .header {
+    width: 355px;
+    margin: 0 auto;
     font-family: montserrat;
-    font-size: 4vh;
+    font-size: 48px;
     text-align: center;
-    padding: 8vh;
+    padding: 20px;
     color: black;
 }
 
@@ -12,18 +14,66 @@
     background-color: whitesmoke;
 }
 
-.container {
+.switch {
+    display: grid;
+    width: 220px;
+    height: 40px;
+    grid-template-columns: 100px 100px;
+    grid-template-rows: 30px;
+    margin: 0 auto 20px auto;
+    cursor: default;
+    justify-content: space-between;
+}
+
+.basic {
+    grid-area: 1 / 1 / 2 / 2;
+    height: 30px;
+    width: 100px;
+    border: 5px solid black;
     display: flex;
-    width: 360px;
-    height: 500px;
+    justify-content: center;
+    align-items: center;
+    font-family: montserrat;
+}
+
+.scientific {
+    grid-area: 1 / 2 / 2 / 3;
+    height: 30px;
+    width: 100px;
+    border: 5px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: montserrat;
+}
+
+.basic-clicked, .scientific-clicked {
+    background-color: #222;
+    color: whitesmoke;
+}
+
+.container-basic {
+    display: flex;
+    width: 355px;
+    height: 505px;
     margin: auto;
     background-color: whitesmoke;
     flex-wrap: wrap;
     font-size: 32px;
 }
 
-.display {
-    width: 340px;
+.container-scientific {
+    display: flex;
+    width: 355px;
+    height: 650px;
+    margin: auto;
+    background-color: whitesmoke;
+    flex-wrap: wrap;
+    font-size: 32px;
+}
+
+.display-basic {
+    width: 335px;
     height: 85px;
     border-top: 10px solid black;
     border-right: 10px solid black;
@@ -36,9 +86,41 @@
     overflow: hidden;
 }
 
+.display-scientific {
+    height: 145px;
+    width: 335px;
+    border-top: 10px solid black;
+    border-right: 10px solid black;
+    border-left: 10px solid black;
+    border-bottom: 5px solid black;
+    font-size: 24px;
+    overflow: auto;
+}
+
+.working {
+    width: 325px;
+    height: 85px;
+    padding: 5px 5px 0 5px;
+    font-size: 24px;
+    overflow: wrap;
+    color: slategray;
+    font-family: monospace;
+}
+
+.answer {
+    width: 325px;
+    height: 45px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 32px;
+    overflow: auto;
+}
+
 .clear {
-    width: 252.5px;
-    height: 69px;
+    width: 248.75px;
+    height: 70px;
     border-top: 5px solid black;
     border-left: 10px solid black;
     border-right: 5px solid black;
@@ -50,8 +132,8 @@
 }
 
 .divide,.multiply,.subtract,.add {
-    width: 77.5px;
-    height: 69px;
+    width: 76.25px;
+    height: 70px;
     border-top: 5px solid black;
     border-right: 10px solid black;
     border-left: 5px solid black;
@@ -63,8 +145,8 @@
 }
 
 .one,.four,.seven {
-    width: 77.5px;
-    height: 69px;
+    width: 76.25px;
+    height: 70px;
     border-top: 5px solid black;
     border-left: 10px solid black;
     border-right: 5px solid black;
@@ -75,9 +157,9 @@
     cursor: default;
 }
 
-.two,.three,.five,.six,.eight,.nine {
-    width: 77.5px;
-    height: 69px;
+.two,.three,.five,.six,.eight,.nine,.decimal {
+    width: 76.25px;
+    height: 70px;
     border-top: 5px solid black;
     border-left: 5px solid black;
     border-right: 5px solid black;
@@ -89,8 +171,21 @@
 }
 
 .zero {
-    width: 165px;
-    height: 69px;
+    width: 76.25px;
+    height: 70px;
+    border-top: 5px solid black;
+    border-left: 5px solid black;
+    border-right: 5px solid black;
+    border-bottom: 10px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+}
+
+.decimal {
+    width: 76.25px;
+    height: 70px;
     border-top: 5px solid black;
     border-left: 10px solid black;
     border-right: 5px solid black;
@@ -102,8 +197,8 @@
 }
 
 .equal {
-    width: 165px;
-    height: 69px;
+    width: 162.5px;
+    height: 70px;
     border-top: 5px solid black;
     border-left: 5px solid black;
     border-right: 10px solid black;
@@ -114,10 +209,50 @@
     cursor: default;
 }
 
+.paren-left {
+    width: 105px;
+    height: 70px;
+    border-top: 5px solid black;
+    border-left: 10px solid black;
+    border-right: 5px solid black;
+    border-bottom: 10px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default; 
+}
+
+.paren-right {
+    width: 105px;
+    height: 70px;
+    border-top: 5px solid black;
+    border-left: 5px solid black;
+    border-right: 5px solid black;
+    border-bottom: 10px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default; 
+}
+
+.exp {
+    width: 105px;
+    height: 70px;
+    border-top: 5px solid black;
+    border-left: 5px solid black;
+    border-right: 10px solid black;
+    border-bottom: 10px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default; 
+}
+
 .one:hover,.two:hover,.three:hover,.four:hover,.five:hover,
 .six:hover,.seven:hover,.eight:hover,.nine:hover,.zero:hover,
 .divide:hover,.multiply:hover,.subtract:hover,.add:hover,
-.equal:hover,.clear:hover {
+.equal:hover,.clear:hover,.decimal:hover,.paren-left:hover,.paren-right:hover,
+.exp:hover {
     background-color: #222;
     color:whitesmoke;
 }
@@ -125,7 +260,8 @@
 .one:active,.two:active,.three:active,.four:active,.five:active,
 .six:active,.seven:active,.eight:active,.nine:active,.zero:active,
 .divide:active,.multiply:active,.subtract:active,.add:active,
-.equal:active,.clear:active {
+.equal:active,.clear:active,.decimal:active,.paren-left:active,.paren-right:active,
+.exp:active {
     background-color: #222;
     color:whitesmoke;
     transform: scale(0.9);

@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8">
     <title>Caclulator</title>
-    <meta name="viewport" content="wclassth=device-wclassth, initial-scale=1">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/reset.css">
@@ -12,8 +11,12 @@
 <body>
     <div class="background"> 
         <p class="header">CALCULATOR</p>
-        <div class="container">
-            <div class="display"></div>
+        <div class="switch">
+            <div class="basic">BASIC</div>
+            <div class="scientific">SCIENTIFIC</div>
+        </div>
+        <div id="container" class="container-basic">
+            <div id="display" class="display-basic"></div>
             <div id="clr" class="clear">CLEAR</div>
             <div id="/" class="divide">/</div>
             <div id="1" class="one">1</div>
@@ -28,10 +31,12 @@
             <div id="8" class="eight">8</div>
             <div id="9" class="nine">9</div>
             <div id="+" class="add">+</div>
+            <div id="." class="decimal">.</div>
             <div id="0" class="zero">0</div>
             <div id="=" class="equal">=</div>
         </div>
      </div>   
-    <script src="js/main.js"></script>
+    <script src="js/basic.js" defer="defer"></script>
+    <script src="js/scientific.js" defer="defer"></script>
 </body>
 </html>
