@@ -101,7 +101,7 @@
     height: 70px;
     padding: 5px 5px 0 5px;
     font-family: monospace;
-    font-size: 24px;
+    font-size: 32px;
     overflow: auto;
     color: black;
 }
@@ -111,11 +111,9 @@
     height: 60px;
     padding: 5px 5px 5px 5px;
     margin-left: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    text-align: right;
     font-family: monospace;
-    font-size: 24px;
+    font-size: 32px;
     overflow: auto;
 }
 

@@ -24,20 +24,24 @@ function calculate(e) {
             rightPar = 0;
             reduced = 0;
             expression = null;
-        // main I/O
+        // evaluation
         } else if (val == '=') {
-            if (working.textContent.length > 0 && leftPar == rightPar) {
+            if (working.textContent.length > 0 && leftPar == rightPar && /\d/g.test(working.textContent)) {
                 expression = working.textContent;
-                raise(); 
-                times();
-                divided();
-                answer.textContent = expression;
-                console.log(expression);
+                parentheses();
+                power(); 
+                multiply();
+                divide();
+                add();
+                subtract();
+                answer.textContent = +expression
             }
+        // I/O control
         } else {
             if(!isNaN(val)) {
                 working.textContent += val;
                 opOK = true;
+                if(leftPar>rightPar){decOK = true;}
             } else if (val == '-' && negOK)  {
                 working.textContent += val;
                 negOK = false;
@@ -54,8 +58,9 @@ function calculate(e) {
                 working.textContent += val;
                 leftPar++;
                 opOK = false;
-            } else if (val == ')' && rightPar<leftPar && working.textContent[last] != '(' && (working.textContent[last] != '.' &&
-                isNaN(working.textContent[last-1]))) {
+                decOK = true;
+            } else if (val == ')' && rightPar<leftPar && working.textContent[last] != '(' && !isNaN(working.textContent[last]) ||
+                (!isNaN(working.textContent[last - 1]) && working.textContent[last] == '.')) {
                     working.textContent += val;
                     rightPar++;
                     opOK = true;
@@ -64,11 +69,11 @@ function calculate(e) {
     }
 }
 
-function raise() {
+function power() {
     if (/\^/.test(expression) == true) {
         while(/\^/.test(expression)) {
-            let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.)\^/.exec(expression)[0];
-            let express2 = /\^(\d+|\d+\.\d+|\.\d+|\d+\.)/.exec(expression)[0];
+            let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)\^/.exec(expression)[0];
+            let express2 = /\^(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(expression)[0];
             let num1 = Number(express1.slice(0, (express1.length - 1)));
             let num2 = Number(express2.slice(1));
             let expressTot = express1.slice(0, (express1.length - 1)) + '^' + express2.slice(1);
@@ -78,11 +83,11 @@ function raise() {
     }
 }
 
-function times() {
+function multiply() {
     if (/\*/.test(expression) == true) {
         while(/\*/.test(expression)) {
-            let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.)\*/.exec(expression)[0];
-            let express2 = /\*(\d+|\d+\.\d+|\.\d+|\d+\.)/.exec(expression)[0];
+            let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)\*/.exec(expression)[0];
+            let express2 = /\*(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(expression)[0];
             let num1 = Number(express1.slice(0, (express1.length - 1)));
             let num2 = Number(express2.slice(1));
             let expressTot = express1.slice(0, (express1.length - 1)) + '*' + express2.slice(1);
@@ -92,17 +97,117 @@ function times() {
     }
 }
 
-function divided() {
+function divide() {
     if (/\//.test(expression) == true) {
         while(/\//.test(expression)) {
-            let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.)\//.exec(expression)[0];
-            let express2 = /\/(\d+|\d+\.\d+|\.\d+|\d+\.)/.exec(expression)[0];
+            let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)\//.exec(expression)[0];
+            let express2 = /\/(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(expression)[0];
             let num1 = Number(express1.slice(0, (express1.length - 1)));
             let num2 = Number(express2.slice(1));
             let expressTot = express1.slice(0, (express1.length - 1)) + '/' + express2.slice(1);
             let result = String(num1 / num2);
             expression = expression.replace(expressTot,result);
         }
+    }
+}
+
+function add() {
+    if (/\+/.test(expression) == true) {
+        while(/\+/.test(expression)) {
+            let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)\+/.exec(expression)[0];
+            let express2 = /\+(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(expression)[0];
+            let num1 = Number(express1.slice(0, (express1.length - 1)));
+            let num2 = Number(express2.slice(1));
+            let expressTot = express1.slice(0, (express1.length - 1)) + '+' + express2.slice(1);
+            let result = String(num1 + num2);
+            expression = expression.replace(expressTot,result);
+        }
+    }
+}
+
+function subtract() {
+    if (/(\d|\.)\-(\.\d|\d|\-\.\d|\-\d)/.test(expression) == true) {
+        while(/(\d|\.)\-(\.\d|\d|\-\.\d|\-\d)/.test(expression)) {
+            let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)\-/.exec(expression)[0];
+            let express2 = /\-(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(expression)[0];
+            let num1 = Number(express1.slice(0, (express1.length - 1)));
+            let num2 = Number(express2.slice(1));
+            let expressTot = express1.slice(0, (express1.length - 1)) + '-' + express2.slice(1);
+            let result = String(num1 - num2);
+            expression = expression.replace(expressTot,result);
+        }
+    }
+}
+
+function parentheses() {
+    if (/\(/.test(expression) == true) {
+        expression.replace(/\)\(/g, ')*(');
+        while(/\(/.test(expression)) {
+            let iso = /\(([0-9]|[\+\-\*\/\^\.])+\)/.exec(expression)[0];
+            if (/(\d|\d\.)\(([0-9]|[\+\-\*\/\^\.])+\)/.test(expression)) {
+                expression = expression.replace(iso, ('*' + iso));
+            }
+            if (/\(([0-9]|[\+\-\*\/\^\.])+\)(\d|\.\d)/.test(expression)) {
+                expression = expression.replace(iso, (iso + '*'));
+            }
+            let newExpress = iso.slice(1, (iso.length - 1));
+            if (/\^/.test(newExpress) == true) {
+                while(/\^/.test(newExpress)) {
+                    let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)\^/.exec(newExpress)[0];
+                    let express2 = /\^(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(newExpress)[0];
+                    let num1 = Number(express1.slice(0, (express1.length - 1)));
+                    let num2 = Number(express2.slice(1));
+                    let expressTot = express1.slice(0, (express1.length - 1)) + '^' + express2.slice(1);
+                    let result = String(Math.pow(num1, num2));
+                    newExpress = newExpress.replace(expressTot,result);
+                }
+            }
+            if (/\*/.test(newExpress) == true) {
+                while(/\*/.test(newExpress)) {
+                    let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)\*/.exec(newExpress)[0];
+                    let express2 = /\*(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(newExpress)[0];
+                    let num1 = Number(express1.slice(0, (express1.length - 1)));
+                    let num2 = Number(express2.slice(1));
+                    let expressTot = express1.slice(0, (express1.length - 1)) + '*' + express2.slice(1);
+                    let result = String(num1 * num2);
+                    newExpress = newExpress.replace(expressTot,result);
+                }
+            }
+            if (/\//.test(newExpress) == true) {
+                while(/\//.test(newExpress)) {
+                    let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)\//.exec(newExpress)[0];
+                    let express2 = /\/(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(newExpress)[0];
+                    let num1 = Number(express1.slice(0, (express1.length - 1)));
+                    let num2 = Number(express2.slice(1));
+                    let expressTot = express1.slice(0, (express1.length - 1)) + '/' + express2.slice(1);
+                    let result = String(num1 / num2);
+                    newExpress = newExpress.replace(expressTot,result);
+                }
+            }
+            if (/\+/.test(newExpress) == true) {
+                while(/\+/.test(newExpress)) {
+                    let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)\+/.exec(newExpress)[0];
+                    let express2 = /\+(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(newExpress)[0];
+                    let num1 = Number(express1.slice(0, (express1.length - 1)));
+                    let num2 = Number(express2.slice(1));
+                    let expressTot = express1.slice(0, (express1.length - 1)) + '+' + express2.slice(1);
+                    let result = String(num1 + num2);
+                    newExpress = newExpress.replace(expressTot,result);
+                }
+            }
+            if (/(\d|\.)\-(\.\d|\d|\-\.\d|\-\d)/.test(newExpress) == true) {
+                while(/(\d|\.)\-(\.\d|\d|\-\.\d|\-\d)/.test(newExpress)) {
+                    let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)\-/.exec(newExpress)[0];
+                    let express2 = /\-(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(newExpress)[0];
+                    let num1 = Number(express1.slice(0, (express1.length - 1)));
+                    let num2 = Number(express2.slice(1));
+                    let expressTot = express1.slice(0, (express1.length - 1)) + '-' + express2.slice(1);
+                    let result = String(num1 - num2);
+                    newExpress = newExpress.replace(expressTot,result);
+                }
+            }
+            expression = expression.replace(iso, newExpress);
+        } 
     }
 }
 

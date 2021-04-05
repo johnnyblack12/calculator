@@ -8,10 +8,6 @@ const seven = document.getElementById('7');
 const eight = document.getElementById('8');
 const nine = document.getElementById('9');
 const zero = document.getElementById('0');
-const add = document.getElementById('+');
-const subtract = document.getElementById('-');
-const multiply = document.getElementById('*');
-const divide = document.getElementById('/');
 const eq = document.getElementById('=');
 const clr = document.getElementById('clr'); 
 
