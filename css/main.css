@@ -1,10 +1,10 @@
 .header {
-    width: 355px;
-    margin: 0 auto;
+    width: 40vh;
+    margin: 2vh auto;
     font-family: montserrat;
-    font-size: 48px;
+    font-size: 4vh;
     text-align: center;
-    padding: 20px;
+    padding: 1vh;
     color: black;
 }
 
@@ -16,20 +16,21 @@
 
 .switch {
     display: grid;
-    width: 220px;
-    height: 40px;
-    grid-template-columns: 100px 100px;
-    grid-template-rows: 30px;
-    margin: 0 auto 20px auto;
+    width: 22vh;
+    height: 3vh;
+    grid-template-columns: 10vh 10vh;
+    grid-template-rows: 3vh;
+    margin: 1vh auto 3vh auto;
     cursor: default;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    font-size: 1.5vh
 }
 
 .basic {
     grid-area: 1 / 1 / 2 / 2;
-    height: 30px;
-    width: 100px;
-    border: 5px solid black;
+    height: 2vh;
+    width: 9vh;
+    border: .5vh solid black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,10 +39,11 @@
 
 .scientific {
     grid-area: 1 / 2 / 2 / 3;
-    height: 30px;
-    width: 100px;
-    border: 5px solid black;
+    height: 2vh;
+    width: 9vh;
+    border: .5vh solid black;
     display: flex;
+    justify-self: end;
     justify-content: center;
     align-items: center;
     font-family: montserrat;
@@ -54,86 +56,84 @@
 
 .container-basic {
     display: flex;
-    width: 355px;
-    height: 505px;
+    width: 40vh;
+    height: 53.5vh;
     margin: auto;
     background-color: whitesmoke;
     flex-wrap: wrap;
-    font-size: 32px;
+    font-size: 3.5vh;
 }
 
 .container-scientific {
     display: flex;
-    width: 355px;
-    height: 650px;
+    width: 40vh;
+    height: 67.4vh;
     margin: auto;
     background-color: whitesmoke;
     flex-wrap: wrap;
-    font-size: 32px;
+    font-size: 3.5vh;
 }
 
 .display-basic {
-    width: 335px;
-    height: 85px;
-    border-top: 10px solid black;
-    border-right: 10px solid black;
-    border-left: 10px solid black;
-    border-bottom: 5px solid black;
+    width: 38vh;
+    height: 9vh;
+    border-top: 1vh solid black;
+    border-right: 1vh solid black;
+    border-left: 1vh solid black;
+    border-bottom: .5vh solid black;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
 
 .screen {
-    width: 335px;
-    height: 70px;
-    padding: 15px 5px 0 5px;
+    width: 37vh;
+    height: 7.5vh;
+    padding: 1.5vh .5vh 0 .5vh;
     font-family: monospace;
-    font-size: 48px;
+    font-size: 4.5vh;
     text-align: right;
     overflow-x: auto;
     overflow-y: hidden;
 }
 
 .display-scientific {
-    height: 145px;
-    width: 335px;
-    border-top: 10px solid black;
-    border-right: 10px solid black;
-    border-left: 10px solid black;
-    border-bottom: 5px solid black;
-    font-size: 24px;
+    height: 14vh;
+    width: 38vh;
+    border-top: 1vh solid black;
+    border-right: 1vh solid black;
+    border-left: 1vh solid black;
+    border-bottom: .5vh solid black;
 }
 
 .working {
-    width: 320px;
-    height: 70px;
-    padding: 5px 5px 0 5px;
+    width: 36.5vh;
+    height: 6.5vh;
+    padding: .5vh .5vh 0 .5vh;
     font-family: monospace;
-    font-size: 32px;
+    font-size: 3.5vh;
     overflow-x: auto;
     overflow-y: hidden;
 }
 
 .answer {
-    width: 320px;
-    height: 60px;
-    padding: 5px 5px 5px 5px;
-    margin-left: 5px;
+    width: 36.5vh;
+    height: 6vh;
+    padding: .5vh;
     text-align: right;
     font-family: monospace;
-    font-size: 32px;
+    font-size: 3.5vh;
     overflow-x: auto;
     overflow-y: hidden;
 }
 
 .clear {
-    width: 248.75px;
-    height: 70px;
-    border-top: 5px solid black;
-    border-left: 10px solid black;
-    border-right: 5px solid black;
-    border-bottom: 5px solid black;
+    width: 28.25vh;
+    height: 7.5vh;
+    border-top: .5vh solid black;
+    border-left: 1vh solid black;
+    border-right: .5vh solid black;
+    border-bottom: .5vh solid black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -141,12 +141,12 @@
 }
 
 .divide,.multiply,.subtract,.add {
-    width: 76.25px;
-    height: 70px;
-    border-top: 5px solid black;
-    border-right: 10px solid black;
-    border-left: 5px solid black;
-    border-bottom: 5px solid black;
+    width: 8.75vh;
+    height: 7.5vh;
+    border-top: .5vh solid black;
+    border-right: 1vh solid black;
+    border-left: .5vh solid black;
+    border-bottom: .5vh solid black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -154,12 +154,12 @@
 }
 
 .one,.four,.seven {
-    width: 76.25px;
-    height: 70px;
-    border-top: 5px solid black;
-    border-left: 10px solid black;
-    border-right: 5px solid black;
-    border-bottom: 5px solid black;
+    width: 8.75vh;
+    height: 7.5vh;
+    border-top: .5vh solid black;
+    border-left: 1vh solid black;
+    border-right: .5vh solid black;
+    border-bottom: .5vh solid black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -167,12 +167,12 @@
 }
 
 .two,.three,.five,.six,.eight,.nine,.decimal {
-    width: 76.25px;
-    height: 70px;
-    border-top: 5px solid black;
-    border-left: 5px solid black;
-    border-right: 5px solid black;
-    border-bottom: 5px solid black;
+    width: 8.75vh;
+    height: 7.5vh;
+    border-top: .5vh solid black;
+    border-left: .5vh solid black;
+    border-right: .5vh solid black;
+    border-bottom: .5vh solid black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -180,12 +180,12 @@
 }
 
 .zero {
-    width: 76.25px;
-    height: 70px;
-    border-top: 5px solid black;
-    border-left: 5px solid black;
-    border-right: 5px solid black;
-    border-bottom: 10px solid black;
+    width: 8.75vh;
+    height: 7.5vh;
+    border-top: .5vh solid black;
+    border-left: .5vh solid black;
+    border-right: .5vh solid black;
+    border-bottom: 1vh solid black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -193,12 +193,12 @@
 }
 
 .decimal {
-    width: 76.25px;
-    height: 70px;
-    border-top: 5px solid black;
-    border-left: 10px solid black;
-    border-right: 5px solid black;
-    border-bottom: 10px solid black;
+    width: 8.75vh;
+    height: 7.5vh;
+    border-top: .5vh solid black;
+    border-left: 1vh solid black;
+    border-right: .5vh solid black;
+    border-bottom: 1vh solid black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -206,12 +206,12 @@
 }
 
 .equal {
-    width: 162.5px;
-    height: 70px;
-    border-top: 5px solid black;
-    border-left: 5px solid black;
-    border-right: 10px solid black;
-    border-bottom: 10px solid black;
+    width: 18.5vh;
+    height: 7.5vh;
+    border-top: .5vh solid black;
+    border-left: .5vh solid black;
+    border-right: 1vh solid black;
+    border-bottom: 1vh solid black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -219,12 +219,12 @@
 }
 
 .paren-left {
-    width: 105px;
-    height: 70px;
-    border-top: 5px solid black;
-    border-left: 10px solid black;
-    border-right: 5px solid black;
-    border-bottom: 10px solid black;
+    width: 12vh;
+    height: 7.5vh;
+    border-top: .5vh solid black;
+    border-left: 1vh solid black;
+    border-right: .5vh solid black;
+    border-bottom: 1vh solid black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -232,12 +232,12 @@
 }
 
 .paren-right {
-    width: 105px;
-    height: 70px;
-    border-top: 5px solid black;
-    border-left: 5px solid black;
-    border-right: 5px solid black;
-    border-bottom: 10px solid black;
+    width: 12vh;
+    height: 7.5vh;
+    border-top: .5vh solid black;
+    border-left: .5vh solid black;
+    border-right: .5vh solid black;
+    border-bottom: 1vh solid black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -245,12 +245,12 @@
 }
 
 .exp {
-    width: 105px;
-    height: 70px;
-    border-top: 5px solid black;
-    border-left: 5px solid black;
-    border-right: 10px solid black;
-    border-bottom: 10px solid black;
+    width: 12vh;
+    height: 7.5vh;
+    border-top: .5vh solid black;
+    border-left: .5vh solid black;
+    border-right: 1vh solid black;
+    border-bottom: 1vh solid black;
     display: flex;
     align-items: center;
     justify-content: center;
