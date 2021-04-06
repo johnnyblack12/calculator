@@ -257,11 +257,11 @@
     cursor: default; 
 }
 
-.no-touch .one:hover,.two:hover,.three:hover,.four:hover,.five:hover,
-.six:hover,.seven:hover,.eight:hover,.nine:hover,.zero:hover,
-.divide:hover,.multiply:hover,.subtract:hover,.add:hover,
-.equal:hover,.clear:hover,.decimal:hover,.paren-left:hover,.paren-right:hover,
-.exp:hover {
+.no-touch .one:hover,.no-touch .two:hover,.no-touch .three:hover,.no-touch .four:hover,.no-touch .five:hover,
+.no-touch .six:hover,.no-touch .seven:hover,.no-touch .eight:hover,.no-touch .nine:hover,.no-touch .zero:hover,
+.no-touch .divide:hover,.no-touch .multiply:hover,.no-touch .subtract:hover,.no-touch .add:hover,
+.no-touch .equal:hover,.no-touch .clear:hover,.no-touch .decimal:hover,.no-touch .paren-left:hover,.no-touch .paren-right:hover,
+.no-touch .exp:hover {
     background-color: #222;
     color:whitesmoke;
 }
@@ -276,9 +276,10 @@
 }
 
 @keyframes button {
-    100% {background-color: #222;
-    color: whitesmoke;
-    transform: scale(0.9);
+    100% {
+        background-color: #222;
+        color: whitesmoke;
+        transform: scale(0.9);
     }
 }
 
