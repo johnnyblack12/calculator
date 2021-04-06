@@ -1,3 +1,7 @@
+if(!('ontouchstart' in document.documentElement)) {
+    document.documentElement.className += "no-touch";
+}
+
 const one = document.getElementById('1');
 const two = document.getElementById('2');
 const three = document.getElementById('3');

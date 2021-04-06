@@ -257,7 +257,7 @@
     cursor: default; 
 }
 
-.one:hover,.two:hover,.three:hover,.four:hover,.five:hover,
+.no-touch .one:hover,.two:hover,.three:hover,.four:hover,.five:hover,
 .six:hover,.seven:hover,.eight:hover,.nine:hover,.zero:hover,
 .divide:hover,.multiply:hover,.subtract:hover,.add:hover,
 .equal:hover,.clear:hover,.decimal:hover,.paren-left:hover,.paren-right:hover,
@@ -271,8 +271,14 @@
 .divide:active,.multiply:active,.subtract:active,.add:active,
 .equal:active,.clear:active,.decimal:active,.paren-left:active,.paren-right:active,
 .exp:active {
-    background-color: #222;
-    color:whitesmoke;
+    animation-name: button;
+    animation-duration: 0.1s;
+}
+
+@keyframes button {
+    100% {background-color: #222;
+    color: whitesmoke;
     transform: scale(0.9);
+    }
 }
 
