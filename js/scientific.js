@@ -155,11 +155,13 @@ function parentheses() {
         expression.replace(/\)\(/g, ')*(');
         while(/\(/.test(expression)) {
             let iso = /\(([0-9]|[\+\-\*\/\^\.])+\)/.exec(expression)[0];
-            if (/(\d|\d\.)\(([0-9]|[\+\-\*\/\^\.])+\)/.test(expression)) {
-                expression = expression.replace(iso, ('*' + iso));
+            if ((expression[expression.indexOf(iso) - 1] == '.' && !isNaN(expression[expression.indexOf(iso) - 1])) ||
+                !isNaN(expression[expression.indexOf(iso) - 1])) {
+                    expression = expression.replace(iso, ('*' + iso));
             }
-            if (/\(([0-9]|[\+\-\*\/\^\.])+\)(\d|\.\d)/.test(expression)) {
-                expression = expression.replace(iso, (iso + '*'));
+            if ((expression[expression.indexOf(iso) + iso.length] == '.' && !isNaN(expression[expression.indexOf(iso) + iso.length + 1])) ||
+                !isNaN(expression[expression.indexOf(iso) + iso.length])) {
+                    expression = expression.replace(iso, (iso + '*'));
             }
             let newExpress = iso.slice(1, (iso.length - 1));
             if (/\^/.test(newExpress) == true) {
