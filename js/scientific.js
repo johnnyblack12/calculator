@@ -4,10 +4,16 @@ let opOk = false;
 let negOK = true;
 let leftPar = 0;
 let rightPar = 0;
-let parOK = false;
+
+let complete = false;
 
 function calculate(e) {
     if (display.classList.contains('display-scientific')) {
+        if (complete) {
+            working.textContent = answer.textContent;
+            answer.textContent = null;
+            complete = false;
+        }
         let val = e.target.id;
         let last = working.textContent.length - 1;
         // clear button
@@ -34,7 +40,8 @@ function calculate(e) {
                 divide();
                 add();
                 subtract();
-                answer.textContent = +expression
+                answer.textContent = +String(Number(expression).toFixed(4));
+                complete = true;
             }
         // I/O control
         } else {
@@ -70,7 +77,7 @@ function calculate(e) {
 }
 
 function power() {
-    if (/\^/.test(expression) == true) {
+    if (/\^/.test(expression)) {
         while(/\^/.test(expression)) {
             let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)\^/.exec(expression)[0];
             let express2 = /\^(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(expression)[0];
@@ -84,7 +91,7 @@ function power() {
 }
 
 function multiply() {
-    if (/\*/.test(expression) == true) {
+    if (/\*/.test(expression)) {
         while(/\*/.test(expression)) {
             let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)\*/.exec(expression)[0];
             let express2 = /\*(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(expression)[0];
@@ -98,7 +105,7 @@ function multiply() {
 }
 
 function divide() {
-    if (/\//.test(expression) == true) {
+    if (/\//.test(expression)) {
         while(/\//.test(expression)) {
             let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)\//.exec(expression)[0];
             let express2 = /\/(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(expression)[0];
@@ -112,7 +119,7 @@ function divide() {
 }
 
 function add() {
-    if (/\+/.test(expression) == true) {
+    if (/\+/.test(expression) && !/e\+/.test(expression)) {
         while(/\+/.test(expression)) {
             let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)\+/.exec(expression)[0];
             let express2 = /\+(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(expression)[0];
@@ -126,7 +133,7 @@ function add() {
 }
 
 function subtract() {
-    if (/(\d|\.)\-(\.\d|\d|\-\.\d|\-\d)/.test(expression) == true) {
+    if (/(\d|\.)\-(\.\d|\d|\-\.\d|\-\d)/.test(expression) && !/e\-/.test(expression)) {
         while(/(\d|\.)\-(\.\d|\d|\-\.\d|\-\d)/.test(expression)) {
             let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)\-/.exec(expression)[0];
             let express2 = /\-(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(expression)[0];
@@ -140,7 +147,7 @@ function subtract() {
 }
 
 function parentheses() {
-    if (/\(/.test(expression) == true) {
+    if (/\(/.test(expression)) {
         expression.replace(/\)\(/g, ')*(');
         while(/\(/.test(expression)) {
             let iso = /\(([0-9]|[\+\-\*\/\^\.])+\)/.exec(expression)[0];

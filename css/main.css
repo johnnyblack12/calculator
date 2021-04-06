@@ -82,8 +82,17 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+}
+
+.screen {
+    width: 335px;
+    height: 70px;
+    padding: 15px 5px 0 5px;
+    font-family: monospace;
     font-size: 48px;
-    overflow: hidden;
+    text-align: right;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .display-scientific {
@@ -102,8 +111,8 @@
     padding: 5px 5px 0 5px;
     font-family: monospace;
     font-size: 32px;
-    overflow: auto;
-    color: black;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .answer {
@@ -114,7 +123,8 @@
     text-align: right;
     font-family: monospace;
     font-size: 32px;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .clear {
