@@ -257,7 +257,7 @@
     cursor: default; 
 }
 
-@media(hover: hover) {
+@media(hover: hover) and (pointer: fine){
     .one:hover,.two:hover,.three:hover,.four:hover,
     .five:hover,.six:hover,.seven:hover,.eight:hover,
     .nine:hover,.zero:hover,.divide:hover,.multiply:hover,
@@ -269,7 +269,7 @@
     }
 }
 
-@media(hover: hover) {
+@media(hover: hover) and (pointer: fine){
     .one:active,.two:active,.three:active,.four:active,
     .five:active,.six:active,.seven:active,.eight:active,
     .nine:active,.zero:active,.divide:active,.multiply:active,

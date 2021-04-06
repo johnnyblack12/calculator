@@ -79,7 +79,10 @@ function calculate(e) {
 function power() {
     if (/\^/.test(expression)) {
         while(/\^/.test(expression)) {
-            let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)\^/.exec(expression)[0];
+            let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.)\^/.exec(expression)[0];
+            if (expression[expression.indexOf(express1)-1] == '-' && (isNaN(expression[expression.indexOf(express1)-2]) || expression.indexOf(express1)-1 == 0)) {
+                express1 = '-' + express1;
+            }
             let express2 = /\^(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(expression)[0];
             let num1 = Number(express1.slice(0, (express1.length - 1)));
             let num2 = Number(express2.slice(1));
@@ -136,7 +139,8 @@ function subtract() {
     if (/(\d|\.)\-(\.\d|\d|\-\.\d|\-\d)/.test(expression) && !/e\-/.test(expression)) {
         while(/(\d|\.)\-(\.\d|\d|\-\.\d|\-\d)/.test(expression)) {
             let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)\-/.exec(expression)[0];
-            let express2 = /\-(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(expression)[0];
+            let express2 = /(\d|\.)\-(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(expression)[0];
+            express2 = express2.slice(1);
             let num1 = Number(express1.slice(0, (express1.length - 1)));
             let num2 = Number(express2.slice(1));
             let expressTot = express1.slice(0, (express1.length - 1)) + '-' + express2.slice(1);
@@ -160,7 +164,10 @@ function parentheses() {
             let newExpress = iso.slice(1, (iso.length - 1));
             if (/\^/.test(newExpress) == true) {
                 while(/\^/.test(newExpress)) {
-                    let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)\^/.exec(newExpress)[0];
+                    let express1 = /(\d+\.\d+|\d+|\.\d+|\d+\.)\^/.exec(newExpress)[0];
+                    if (newExpress[newExpress.indexOf(express1)-1] == '-' && isNaN(newExpress[newExpress.indexOf(express1)-2])) {
+                        express1 = '-' + express1;
+                    }
                     let express2 = /\^(\d+\.\d+|\d+|\.\d+|\d+\.|\-\d+\.\d+|\-\d+|\-\.\d+|\-\d+\.)/.exec(newExpress)[0];
                     let num1 = Number(express1.slice(0, (express1.length - 1)));
                     let num2 = Number(express2.slice(1));
