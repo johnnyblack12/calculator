@@ -9,15 +9,10 @@ let complete = false;
 
 function calculate(e) {
     if (display.classList.contains('display-scientific')) {
-        if (complete) {
-            working.textContent = answer.textContent;
-            answer.textContent = null;
-            complete = false;
-        }
         let val = e.target.id;
         let last = working.textContent.length - 1;
-        // clear button
-        if(val == 'clr') {
+        // handle backspace on evaluated expression
+        if (val == 'back' && complete) {
             working.textContent = '';
             answer.textContent = '';
             decOK = true;
@@ -30,6 +25,66 @@ function calculate(e) {
             rightPar = 0;
             reduced = 0;
             expression = null;
+            complete = false;
+        }
+        // restart if input after evaluated expression
+        if (complete) {
+            working.textContent = answer.textContent;
+            answer.textContent = null;
+            complete = false;
+        }
+        // clear button
+        if (val == 'clr') {
+            working.textContent = '';
+            answer.textContent = '';
+            decOK = true;
+            opOk = false;
+            negOK = true;
+            paren = false;
+            expOK = false;
+            finish = false;
+            leftPar = 0;
+            rightPar = 0;
+            reduced = 0;
+            expression = null;
+        // backspace
+        } else if (val == 'back') {
+            let newStr = Array.from(working.textContent);
+            let newStrLast = newStr[newStr.length-1];
+            let newStrLast2 = newStr[newStr.length-2];
+            if (newStr.length == 1) {
+                decOK = true;
+                opOk = false;
+                negOK = true;
+                paren = false;
+                expOK = false;
+                finish = false;
+                leftPar = 0;
+                rightPar = 0;
+                reduced = 0;
+                expression = null;
+            } else if (!isNaN(newStrLast) && isNaN(newStrLast2)) {
+                opOK = false;
+                if(leftPar>rightPar){decOK = false;}
+            } else if (newStrLast == '-' && !negOK) {
+                negOK = true;
+                decOK = false;
+            } else if ((newStrLast == '+' || newStrLast == '-' || newStrLast == '*' || newStrLast == '/' || newStrLast == '^') & !opOK) {
+                opOK = true;
+                negOK = false;
+                decOK = false;
+            } else if (newStrLast == '.') {
+                decOK = true;
+            } else if (newStrLast == '(') {
+                leftPar--;
+                opOK = true;
+                decOK = false;
+            } else if (newStrLast == ')') {
+                rightPar--;
+                opOK = false;
+            }
+            newStr.pop();
+            working.textContent = newStr.join('');
         // evaluation
         } else if (val == '=') {
             if (working.textContent.length > 0 && leftPar == rightPar && /\d/g.test(working.textContent)) {
@@ -40,7 +95,7 @@ function calculate(e) {
                 divide();
                 add();
                 subtract();
-                answer.textContent = +String(Number(expression).toFixed(4));
+                answer.textContent = +String(Number(expression).toFixed(8));
                 complete = true;
             }
         // I/O control

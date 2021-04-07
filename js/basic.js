@@ -10,6 +10,7 @@ const nine = document.getElementById('9');
 const zero = document.getElementById('0');
 const eq = document.getElementById('=');
 const clr = document.getElementById('clr');
+const back = document.getElementById('back');
 const slash = document.getElementById('/');
 const star = document.getElementById('*');
 const dash = document.getElementById('-');
@@ -80,7 +81,9 @@ let finished = false;
 function num(e) {
     if (display.classList.contains('display-basic')) {
         if (finished) {
-            screen.textContent = '';
+            if (!isNaN(screen.textContent[screen.textContent.length - 1])) {
+                screen.textContent = '';
+            }
             finished = false;
         }
         screen.textContent += Number(e.target.id);
@@ -94,19 +97,41 @@ function clear() {
         val2 = null;
         oper = null;
         screen.textContent = '';
+        finished = false;
+    }
+}
+
+function backspace() {
+    if (display.classList.contains('display-basic')) {
+        if (finished) {
+            val1 = null;
+            val2 = null;
+            oper = null;
+            screen.textContent = '';
+            finished = false;
+        } else if (!val1) {
+            let newStr = Array.from(screen.textContent);
+            newStr.pop();
+            screen.textContent = newStr.join('');
+        } else if (val1 && !isNaN(screen.textContent[screen.textContent.length-1])) {
+            let newStr = Array.from(screen.textContent);
+            newStr.pop();
+            screen.textContent = newStr.join('');
+        }
     }
 }
 
 function operate() {
     if (oper == '/') {
-        screen.textContent = +(Number(val1) / Number(screen.textContent.replace((val1 + oper), ''))).toFixed(6);
+        screen.textContent = +(Number(val1) / Number(screen.textContent.replace((val1 + oper), ''))).toFixed(8);
     } else if (oper == '*') {
-        screen.textContent = +(Number(val1) * Number(screen.textContent.replace((val1 + oper), ''))).toFixed(6);
+        screen.textContent = +(Number(val1) * Number(screen.textContent.replace((val1 + oper), ''))).toFixed(8);
     } else if (oper == '-') {
-        screen.textContent = +(Number(val1) - Number(screen.textContent.replace((val1 + oper), ''))).toFixed(6);
+        screen.textContent = +(Number(val1) - Number(screen.textContent.replace((val1 + oper), ''))).toFixed(8);
     } else if (oper == '+') {
-        screen.textContent = +(Number(val1) + Number(screen.textContent.replace((val1 + oper), ''))).toFixed(6);
+        screen.textContent = +(Number(val1) + Number(screen.textContent.replace((val1 + oper), ''))).toFixed(8);
     }
+    finished = true;
 }
 
 function divide() {
@@ -227,4 +252,5 @@ dash.addEventListener('click', minus);
 cross.addEventListener('click', plus);
 eq.addEventListener('click', equ);
 period.addEventListener('click', dec);
+back.addEventListener('click', backspace);
 

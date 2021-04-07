@@ -128,10 +128,23 @@
 }
 
 .clear {
-    width: 28.25vh;
+    width: 13.625vh;
     height: 7.5vh;
     border-top: .5vh solid black;
     border-left: 1vh solid black;
+    border-right: .5vh solid black;
+    border-bottom: .5vh solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+}
+
+.back {
+    width: 13.625vh;
+    height: 7.5vh;
+    border-top: .5vh solid black;
+    border-left: .5vh solid black;
     border-right: .5vh solid black;
     border-bottom: .5vh solid black;
     display: flex;
@@ -262,7 +275,7 @@
     .five:hover,.six:hover,.seven:hover,.eight:hover,
     .nine:hover,.zero:hover,.divide:hover,.multiply:hover,
     .subtract:hover,.add:hover,.equal:hover,.clear:hover,
-    .decimal:hover,.paren-left:hover,.paren-right:hover,
+    .back:hover,.decimal:hover,.paren-left:hover,.paren-right:hover,
     .exp:hover {
         background-color: #222;
         color:whitesmoke;
@@ -274,7 +287,7 @@
     .five:active,.six:active,.seven:active,.eight:active,
     .nine:active,.zero:active,.divide:active,.multiply:active,
     .subtract:active,.add:active,.equal:active,.clear:active,
-    .decimal:active,.paren-left:active,.paren-right:active,
+    .back:active,.decimal:active,.paren-left:active,.paren-right:active,
     .exp:active {
         background-color: #222;
         color: whitesmoke;
