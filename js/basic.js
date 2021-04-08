@@ -91,6 +91,19 @@ function num(e) {
     }
 }
 
+function numKey(e) {
+    if (display.classList.contains('display-basic')) {
+        if (finished) {
+            if (!isNaN(screen.textContent[screen.textContent.length - 1])) {
+                screen.textContent = '';
+            }
+            finished = false;
+    }
+        screen.textContent += Number(e.key);
+        operOK = true;
+    }
+}
+
 function clear() {
     if (display.classList.contains('display-basic')) {
         val1 = null;
@@ -134,7 +147,7 @@ function operate() {
     finished = true;
 }
 
-function divide() {
+function outOf() {
     if (display.classList.contains('display-basic')) {
         if (operOK) {
             if (oper) {
@@ -246,7 +259,7 @@ eight.addEventListener('click', num);
 nine.addEventListener('click', num);
 zero.addEventListener('click', num);
 clr.addEventListener('click', clear);
-slash.addEventListener('click', divide);
+slash.addEventListener('click', outOf);
 star.addEventListener('click', times);
 dash.addEventListener('click', minus);
 cross.addEventListener('click', plus);
@@ -254,3 +267,17 @@ eq.addEventListener('click', equ);
 period.addEventListener('click', dec);
 back.addEventListener('click', backspace);
 
+window.addEventListener('keydown', (e) => {
+    if (display.classList.contains('display-basic')) {
+        if (!isNaN(e.key)) {numKey(e);}
+        else if (e.key == 'Delete') {clear();}
+        else if (e.key == 'Backspace') {backspace();}
+        else if (e.key == '.') {dec();}
+        else if (e.key == '/') {outOf();}
+        else if (e.key == '*') {times();}
+        else if (e.key == '-') {minus();}
+        else if (e.key == '+') {plus();}
+        else if (e.key == 'Enter') {equ();}
+        else {console.log(e.key);}
+    }
+});

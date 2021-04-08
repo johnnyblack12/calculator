@@ -283,3 +283,4 @@ function parentheses() {
 }
 
 container.addEventListener('click', calculate);
+// Solve e.key to calculate translation
