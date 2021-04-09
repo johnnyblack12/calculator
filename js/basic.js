@@ -278,6 +278,5 @@ window.addEventListener('keydown', (e) => {
         else if (e.key == '-') {minus();}
         else if (e.key == '+') {plus();}
         else if (e.key == 'Enter') {equ();}
-        else {console.log(e.key);}
     }
 });

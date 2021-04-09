@@ -1,6 +1,6 @@
 let expression;
 let decOK = true;
-let opOk = false;
+let opOK = false;
 let negOK = true;
 let leftPar = 0;
 let rightPar = 0;
@@ -9,14 +9,23 @@ let complete = false;
 
 function calculate(e) {
     if (display.classList.contains('display-scientific')) {
-        let val = e.target.id;
+        let val;
+        if (e.target.id) {
+            val = e.target.id;
+        } else if (e.key) {
+            if (e.key == 'Delete') {val = 'clr';}
+            else if (e.key == 'Backspace') {val = 'back';}
+            else if (e.key == 'Enter') {val = '=';}
+            else if (!isNaN(e.key) || /(\(|\)|\^|\.|\/|\*|\-|\+|\=)/.test(e.key)) {val = e.key;}
+            else {val = 'null'};
+        }
         let last = working.textContent.length - 1;
         // handle backspace on evaluated expression
         if (val == 'back' && complete) {
             working.textContent = '';
             answer.textContent = '';
             decOK = true;
-            opOk = false;
+            opOK = false;
             negOK = true;
             paren = false;
             expOK = false;
@@ -27,10 +36,42 @@ function calculate(e) {
             expression = null;
             complete = false;
         }
-        // restart if input after evaluated expression
-        if (complete) {
-            working.textContent = answer.textContent;
-            answer.textContent = null;
+        // handle infinity
+        if (complete && answer.textContent == 'Infinity') {
+            working.textContent = '';
+            answer.textContent = '';
+            decOK = true;
+            opOK = false;
+            negOK = true;
+            paren = false;
+            expOK = false;
+            finish = false;
+            leftPar = 0;
+            rightPar = 0;
+            reduced = 0;
+            expression = null;
+            complete = false;
+        }
+        // continue working if operator input after evaluated expression
+        else if (complete && (val == '^' || val == '/' || val == '*' || val == '-' || val == '+' ||
+            val == '(' || (val == '.' && !/\./.test(answer.textContent)))) {
+                working.textContent = answer.textContent;
+                answer.textContent = null;
+                complete = false;
+        // clear if number input after evaluted expression
+        } else if (complete && val != 'null') {
+            working.textContent = '';
+            answer.textContent = '';
+            decOK = true;
+            opOK = false;
+            negOK = true;
+            paren = false;
+            expOK = false;
+            finish = false;
+            leftPar = 0;
+            rightPar = 0;
+            reduced = 0;
+            expression = null;
             complete = false;
         }
         // clear button
@@ -38,7 +79,7 @@ function calculate(e) {
             working.textContent = '';
             answer.textContent = '';
             decOK = true;
-            opOk = false;
+            opOK = false;
             negOK = true;
             paren = false;
             expOK = false;
@@ -54,7 +95,7 @@ function calculate(e) {
             let newStrLast2 = newStr[newStr.length-2];
             if (newStr.length == 1) {
                 decOK = true;
-                opOk = false;
+                opOK = false;
                 negOK = true;
                 paren = false;
                 expOK = false;
@@ -283,4 +324,4 @@ function parentheses() {
 }
 
 container.addEventListener('click', calculate);
-// Solve e.key to calculate translation
+window.addEventListener('keydown', calculate);
