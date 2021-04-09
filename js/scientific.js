@@ -106,7 +106,6 @@ function calculate(e) {
                 expression = null;
             } else if (!isNaN(newStrLast) && isNaN(newStrLast2)) {
                 opOK = false;
-                if(leftPar>rightPar){decOK = false;}
             } else if (newStrLast == '-' && !negOK) {
                 negOK = true;
                 decOK = false;
@@ -123,6 +122,7 @@ function calculate(e) {
             } else if (newStrLast == ')') {
                 rightPar--;
                 opOK = false;
+                decOK = false;
             }
             newStr.pop();
             working.textContent = newStr.join('');
@@ -144,29 +144,30 @@ function calculate(e) {
             if(!isNaN(val)) {
                 working.textContent += val;
                 opOK = true;
-                if(leftPar>rightPar){decOK = true;}
-            } else if (val == '-' && negOK)  {
-                working.textContent += val;
-                negOK = false;
-                decOK = true;
             } else if ((val == '+' || val == '-' || val == '*' || val == '/' || val == '^') && opOK) {
                 working.textContent += val;
                 opOK = false;
                 negOK = true;
                 decOK = true;
+            } else if (val == '-' && negOK)  {
+                working.textContent += val;
+                negOK = false;
+                decOK = true;
             } else if (val == '.' && decOK) {
                 working.textContent += val;
                 decOK = false;
+                negOK = false;
             } else if (val == '(' && leftPar>=rightPar) {
                 working.textContent += val;
                 leftPar++;
                 opOK = false;
                 decOK = true;
-            } else if (val == ')' && rightPar<leftPar && working.textContent[last] != '(' && !isNaN(working.textContent[last]) ||
-                (!isNaN(working.textContent[last - 1]) && working.textContent[last] == '.')) {
+            } else if (val == ')' && rightPar<leftPar && working.textContent[last] != '(' && (!isNaN(working.textContent[last]) ||
+                (!isNaN(working.textContent[last - 1]) && working.textContent[last] == '.'))) {
                     working.textContent += val;
                     rightPar++;
                     opOK = true;
+                    decOK = true;
             }
         }
     }

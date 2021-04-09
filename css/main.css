@@ -31,7 +31,7 @@
     height: 2vh;
     width: 9vh;
     border: .5vh solid black;
-    box-shadow: 2px 2px #222;
+    box-shadow: .3vh .3vh #222;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,7 +43,7 @@
     height: 2vh;
     width: 9vh;
     border: .5vh solid black;
-    box-shadow: 2px 2px #222;
+    box-shadow: .3vh .3vh #222;
     display: flex;
     justify-self: end;
     justify-content: center;
@@ -63,7 +63,7 @@
     height: 53.5vh;
     margin: auto;
     background-color: whitesmoke;
-    box-shadow: 5px 5px #222;
+    box-shadow: 1vh 1vh #222;
     flex-wrap: wrap;
     font-size: 3.5vh;
 }
@@ -74,7 +74,7 @@
     height: 67.4vh;
     margin: auto;
     background-color: whitesmoke;
-    box-shadow: 5px 5px #222;
+    box-shadow: 1vh 1vh #222;
     flex-wrap: wrap;
     font-size: 3.5vh;
 }

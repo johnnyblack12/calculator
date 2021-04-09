@@ -75,6 +75,7 @@ display.appendChild(screen);
 let val1;
 let oper;
 let operOK = false;
+let minusOK = true;
 let decimOK = true;
 let finished = false;
 
@@ -109,6 +110,9 @@ function clear() {
         val1 = null;
         val2 = null;
         oper = null;
+        operOK = false;
+        decimOK = true;
+        minusOK = true;
         screen.textContent = '';
         finished = false;
     }
@@ -120,13 +124,27 @@ function backspace() {
             val1 = null;
             val2 = null;
             oper = null;
+            operOK = false;
+            decimOK = true;
+            minusOK = true;
             screen.textContent = '';
             finished = false;
-        } else if (!val1) {
+        } else if (screen.textContent[screen.textContent.length-1] == '-' && !minusOK) {
             let newStr = Array.from(screen.textContent);
             newStr.pop();
             screen.textContent = newStr.join('');
-        } else if (val1 && !isNaN(screen.textContent[screen.textContent.length-1])) {
+            minusOK = true;
+        } else if (screen.textContent[screen.textContent.length-1] == '.' && !decimOK) {
+            let newStr = Array.from(screen.textContent);
+            newStr.pop();
+            screen.textContent = newStr.join('');
+            decimOK = true;
+            minusOK = true;
+        }else if (!val1) {
+            let newStr = Array.from(screen.textContent);
+            newStr.pop();
+            screen.textContent = newStr.join('');
+        } else if (val1 && (!isNaN(screen.textContent[screen.textContent.length-1]))) {
             let newStr = Array.from(screen.textContent);
             newStr.pop();
             screen.textContent = newStr.join('');
@@ -135,34 +153,32 @@ function backspace() {
 }
 
 function operate() {
-    if (oper == '/') {
-        screen.textContent = +(Number(val1) / Number(screen.textContent.replace((val1 + oper), ''))).toFixed(8);
-    } else if (oper == '*') {
-        screen.textContent = +(Number(val1) * Number(screen.textContent.replace((val1 + oper), ''))).toFixed(8);
-    } else if (oper == '-') {
-        screen.textContent = +(Number(val1) - Number(screen.textContent.replace((val1 + oper), ''))).toFixed(8);
-    } else if (oper == '+') {
-        screen.textContent = +(Number(val1) + Number(screen.textContent.replace((val1 + oper), ''))).toFixed(8);
+    if (display.classList.contains('display-basic')) {   
+        if (oper == '/') {
+            screen.textContent = +(Number(val1) / Number(screen.textContent.replace((val1 + oper), ''))).toFixed(8);
+        } else if (oper == '*') {
+            screen.textContent = +(Number(val1) * Number(screen.textContent.replace((val1 + oper), ''))).toFixed(8);
+        } else if (oper == '-') {
+            screen.textContent = +(Number(val1) - Number(screen.textContent.replace((val1 + oper), ''))).toFixed(8);
+        } else if (oper == '+') {
+            screen.textContent = +(Number(val1) + Number(screen.textContent.replace((val1 + oper), ''))).toFixed(8);
+        }
+        finished = true;
+        if (!/\./.test(screen.textContent)) {decimOK = true;}
     }
-    finished = true;
 }
 
 function outOf() {
     if (display.classList.contains('display-basic')) {
         if (operOK) {
-            if (oper) {
-                operate();
-                val1 = screen.textContent;
-                oper = '/';
-                screen.textContent += oper;
-                operOK = false;
-            } else {
-                val1 = screen.textContent;
-                screen.textContent += '/'
-                oper = '/'
-                operOK = false;
-            }
+            if (oper) {operate();}
+            val1 = screen.textContent;
+            oper = '/'
+            screen.textContent += oper;
+            operOK = false;
+            operOK = false;
             decimOK = true;
+            minusOK = true;
         }
     }
 }
@@ -170,19 +186,13 @@ function outOf() {
 function times() {
     if (display.classList.contains('display-basic')) {
         if (operOK) {
-            if (oper) {
-                operate();
-                val1 = screen.textContent;
-                oper = '*';
-                screen.textContent += oper;
-                operOK = false;
-            } else {
-                val1 = screen.textContent;
-                screen.textContent += '*'
-                oper = '*'
-                operOK = false;
-            }
+            if (oper) {operate();}
+            val1 = screen.textContent;
+            oper = '*';
+            screen.textContent += oper;
+            operOK = false;
             decimOK = true;
+            minusOK = true;
         }
     }
 }
@@ -190,21 +200,16 @@ function times() {
 function minus() {
     if (display.classList.contains('display-basic')) {
         if (operOK) {
-            if (oper) {
-                operate();
-                val1 = screen.textContent;
-                oper = '-';
-                screen.textContent += oper;
-                operOK = false;
-            } else if (screen.textContent != '') {
-                val1 = screen.textContent;
-                screen.textContent += '-'
-                oper = '-'
-                operOK = false;
-            }
+            if (oper) {operate();}
+            val1 = screen.textContent;
+            oper = '-';
+            screen.textContent += oper;
+            operOK = false;
+            minusOK = true;
             decimOK = true;
-        } else {
+        } else if (minusOK) {
             screen.textContent += '-';
+            minusOK = false;
         }
     }
 }
@@ -212,19 +217,13 @@ function minus() {
 function plus() {
     if (display.classList.contains('display-basic')) {
         if (operOK) {
-            if (oper) {
-                operate();
-                val1 = screen.textContent;
-                oper = '+';
-                screen.textContent += oper;
-                operOK = false;
-            } else {
-                val1 = screen.textContent;
-                screen.textContent += '+'
-                oper = '+'
-                operOK = false;
-            }
+            if (oper) {operate();}
+            val1 = screen.textContent;
+            oper = '+';
+            screen.textContent += oper;
+            operOK = false;
             decimOK = true;
+            minusOK = true;
         }
     }
 }
@@ -236,14 +235,18 @@ function equ() {
             val1 = screen.textContent;
             oper = null;
             decimOK = true;
+            minusOK = true;
         }
     }
 }
 
 function dec() {
     if (display.classList.contains('display-basic')) {
-        screen.textContent += '.';
-        decimOK = false;
+        if (decimOK) {
+            screen.textContent += '.';
+            decimOK = false;
+            minusOK = false;
+        }
     }
 }
 
