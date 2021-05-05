@@ -46,6 +46,10 @@ basic.addEventListener('click', () => {
     basic.classList.add('basic-clicked');
     working.textContent = '';
     container.classList.replace('container-scientific', 'container-basic');
+    eq.setAttribute('style','border-bottom-right-radius: 2px');
+    period.setAttribute('style', 'border-bottom-left-radius: 2px');
+    parenLeft.removeAttribute('style','border-bottom-left-radius: 2px');
+    exp.removeAttribute('style','border-bottom-right-radius: 2px');
     container.removeChild(parenLeft);
     container.removeChild(parenRight);
     container.removeChild(exp);
@@ -60,6 +64,10 @@ scientific.addEventListener('click', () => {
     scientific.classList.add('scientific-clicked');
     screen.textContent = '';
     container.classList.replace('container-basic', 'container-scientific');
+    eq.removeAttribute('style','border-bottom-right-radius: 2px');
+    period.removeAttribute('style', 'border-bottom-left-radius: 2px');
+    parenLeft.setAttribute('style','border-bottom-left-radius: 2px');
+    exp.setAttribute('style','border-bottom-right-radius: 2px');
     container.appendChild(parenLeft);
     container.appendChild(parenRight);
     container.appendChild(exp);
@@ -70,6 +78,8 @@ scientific.addEventListener('click', () => {
 });
 
 basic.classList.add('basic-clicked');
+eq.setAttribute('style','border-bottom-right-radius: 2px');
+period.setAttribute('style', 'border-bottom-left-radius: 2px');
 display.appendChild(screen);
 
 let val1;

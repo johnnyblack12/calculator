@@ -32,6 +32,7 @@
     height: 2vh;
     width: 9vh;
     border: .5vh solid black;
+    border-radius: 2px;
     box-shadow: .3vh .3vh #222;
     display: flex;
     justify-content: center;
@@ -44,6 +45,7 @@
     height: 2vh;
     width: 9vh;
     border: .5vh solid black;
+    border-radius: 2px;
     box-shadow: .3vh .3vh #222;
     display: flex;
     justify-self: end;
@@ -64,6 +66,7 @@
     height: 53.5vh;
     margin: auto;
     background-color: whitesmoke;
+    border-radius: 2px;
     box-shadow: 1vh 1vh #222;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -76,6 +79,7 @@
     height: 67.5vh;
     margin: auto;
     background-color: whitesmoke;
+    border-radius: 2px;
     box-shadow: 1vh 1vh #222;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -89,6 +93,8 @@
     border-right: 1vh solid black;
     border-left: 1vh solid black;
     border-bottom: .5vh solid black;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -112,6 +118,8 @@
     border-right: 1vh solid black;
     border-left: 1vh solid black;
     border-bottom: .5vh solid black;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
 }
 
 .working {
