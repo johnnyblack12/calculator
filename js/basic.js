@@ -254,6 +254,7 @@ function dec() {
     if (display.classList.contains('display-basic')) {
         if (decimOK) {
             screen.textContent += '.';
+            operOK = false;
             decimOK = false;
             minusOK = false;
         }

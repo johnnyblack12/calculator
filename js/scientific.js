@@ -137,6 +137,9 @@ function calculate(e) {
                 add();
                 subtract();
                 answer.textContent = +String(Number(expression).toFixed(8));
+                if (answer.textContent == 'Infinity' || answer.textContent == 'NaN') {
+                    answer.textContent = 'Undefined';
+                }
                 complete = true;
             }
         // I/O control
@@ -157,13 +160,13 @@ function calculate(e) {
                 working.textContent += val;
                 decOK = false;
                 negOK = false;
-            } else if (val == '(' && leftPar>=rightPar) {
+                opOK = false;
+            } else if (val == '(' && leftPar>=rightPar && working.textContent[last] != '.') {
                 working.textContent += val;
                 leftPar++;
                 opOK = false;
                 decOK = true;
-            } else if (val == ')' && rightPar<leftPar && working.textContent[last] != '(' && (!isNaN(working.textContent[last]) ||
-                (!isNaN(working.textContent[last - 1]) && working.textContent[last] == '.'))) {
+            } else if (val == ')' && rightPar<leftPar && working.textContent[last] != '(' && (!isNaN(working.textContent[last]))) {
                     working.textContent += val;
                     rightPar++;
                     opOK = true;
